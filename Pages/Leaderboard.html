@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset ="utf-8">
+	    <meta name= "viewport" content = "width= device-width, initial-scale=1">
+        <!--Leaderboard Page-->
+        <title> Leaderboard Page</title>
+        <!--link to CSS stylesheet-->
+        <link rel= "stylesheet" type ="text/css" href ="../CSS/Leaderboard-style.css">
+
+        <!--link for font style and icons-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&display=swap" rel="stylesheet">
+
+
+
+
+        
+    </head>
+
+
+    <body>
+
+        <header>
+           <!--div class logo container to hold the logo-->
+            <div class="logo-container">
+                <a href="#"><i class="TextLogo"><span>Tankers</span></i></a><span class="MainLogo"><img src="../Images/tank_logo.png" alt="Tank" wdith="20px" height="60px"></span>
+    
+    
+            </div>
+            <!--div class navbar for navigation bar holding the elements of the navbar-->
+            <div class="navbar">
+                <a href="../Pages/Rules.html"><span>Rules</span></a><i class="ri-pencil-line"></i>
+                <a href="../Pages/Leaderboard.html"><span>Leaderboard</span></a><i class="ri-trophy-line"></i>
+                <a href="../Pages/Game.html"><span>Game</span></a><i class="ri-gamepad-line"></i>
+                <a href="../Pages/Login.html"><span>Login</span></a><i class="ri-login-box-line"></i>
+                <a href="../Pages/Register.html"><span>Register</span></a><i class="ri-user-3-line"></i>
+            </div>
+    
+    
+            
+            
+        </header>
+
+                <!--div class leaderboard-main hold the contents of the leaderboard-->
+                <div class="leaderboard-main">
+        
+                    
+        
+        
+        
+                        
+                    <!--div class txt-field contain the the header of the leaderboard and trophy img-->
+                    <div class="txt_field">
+                        <img src="../Images/Trophy.png" alt="Trophy" wdith="50px" height="100px">
+        
+                        <h1 >
+                            LEADERBOARD
+                        </h1> 
+                    </div>
+                    <!--table class contain the table for the leaderboard-->
+                    <table class="table">
+                        <!--creating table row-->
+                        <tr>
+                            <!--table headers for table-->
+                            <th>Username</th>
+                            <th>Score</th>
+                        </tr>
+        
+                        <tr>
+                            <!--table data-->
+                            <td>1.Yuta</td>
+                            <td>42</td>
+        
+                        
+                        </tr>
+        
+                        <tr>
+                            <td>2.Soul The Egoist</td>    
+                            <td>32</td>
+        
+                        
+                        </tr>
+        
+                        <tr>
+                            <td>3.jackle48175</td>
+                            <td>14</td>
+        
+                        
+                        </tr>
+                        
+                        <tr>
+                            <td>4.LeviAck</td>
+                            <td>06</td>
+        
+                        
+                        </tr>
+        
+                    
+                    </table>
+
+                    <!--div class Diamond contain all the imgaes of diamond-->
+                    <div class="Diamond">
+                    <img src="../Images/Diamond.png" alt="Dia0">
+                    <img src="../Images/Diamond.png" alt="Dia1">
+                    <img src="../Images/Diamond.png" alt="Dia2">
+                    <img src="../Images/Diamond.png" alt="Dia3">
+                    <img src="../Images/Diamond.png" alt="Dia4">
+                    <img src="../Images/Diamond.png" alt="Dia5">
+                    <img src="../Images/Diamond.png" alt="Dia6">
+                    <img src="../Images/Diamond.png" alt="Dia7">
+                    <img src="../Images/Diamond.png" alt="Dia8">
+                    <img src="../Images/Diamond.png" alt="Dia9">
+                    <img src="../Images/Diamond.png" alt="Dia10">
+                    <img src="../Images/Diamond.png" alt="Dia11">
+                    
+                    
+
+
+
+
+
+                    </div>
+                    
+
+                    
+
+
+                </div>
+
+
+                <script>
+                    
+                    // retrieve user data from local storage
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                
+                    // function to update leaderboard
+                    function updateLeaderboard() {
+                        // get the leaderboard table
+                        let leaderboardTable = document.querySelector('.table');
+                
+                        // clear existing rows in the table
+                        while (leaderboardTable.rows.length > 1) {
+                            leaderboardTable.deleteRow(1);
+                        }
+                
+                        // sort users based on the score in descending order
+                        users.sort((a, b) => b.score - a.score);
+                
+                        // display only the top 4 scores
+                        let topScores = users.slice(0, 4);
+                        
+                    
+                
+                        // populate the table with user data from local storage
+                        topScores.forEach((user, index) => {
+                            let row = leaderboardTable.insertRow(index + 1);
+                            let cellUsername = row.insertCell(0);
+                            let cellScore = row.insertCell(1);
+                            
+                
+                           
+                            if (user.score !== "") {
+                                
+                                cellUsername.innerHTML = user.username;
+                                cellScore.innerHTML = user.score;
+                            }
+                        });
+                    }
+
+                    
+                
+                    // Call the updateLeaderboard function when the page loads
+                    window.onload = function () {
+                        updateLeaderboard();
+                    };
+                </script>
+        
+        
+        
+        
+        
+    
+        
+        
+        
+                 
+        
+        
+           
+            
+        
+        
+           
+        
+    </body>
+</html>

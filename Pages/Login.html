@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset ="utf-8">
+	    <meta name= "viewport" content = "width= device-width, initial-scale=1">
+        <!-- login page-->
+        <title> Login Page</title>
+        <!--link to CSS stylesheet-->
+        <link rel= "stylesheet" type ="text/css" href ="../CSS/Login-style.css">
+
+        <!--link for font style and icons-->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://fonts.googleapis.com">
+        <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&display=swap" rel="stylesheet">
+
+
+
+
+        
+    </head>
+
+
+    <body>
+
+        <header>
+            <!--div class logo container to hold the logo-->
+            <div class="logo-container">
+                <a href="#"><i class="TextLogo"><span>Tankers</span></i></a><span class="MainLogo"><img src="../Images/tank_logo.png" alt="Tank" wdith="20px" height="60px"></span>
+    
+    
+            </div>
+            <!--div class navbar for navigation bar holding the elements of the navbar-->
+            <div class="navbar">
+                <a href="../Pages/Rules.html"><span>Rules</span></a><i class="ri-pencil-line"></i>
+                <a href="../Pages/Leaderboard.html"><span>Leaderboard</span></a><i class="ri-trophy-line"></i>
+                <a href="../Pages/Game.html"><span>Game</span></a><i class="ri-gamepad-line"></i>
+                <a href="../Pages/Login.html"><span>Login</span></a><i class="ri-login-box-line"></i>
+                <a href="../Pages/Register.html"><span>Register</span></a><i class="ri-user-3-line"></i>
+            </div>
+    
+    
+            
+
+
+            
+        </header>
+        <!--div class login to contain to contents of the login-->
+        <div class="login">
+            <h1>Login</h1>
+            <!--form method post to contain the txt_field-->
+            <form id="mysignin" onsubmit="return isRegistered();" method="post">
+                <!--div class txt_field to contain input and label-->
+                <div class="txt_field">
+                    <input type="text" id="usernameInput" required>
+                    <label>Username</label>
+
+
+
+                </div>
+                <div class="txt_field">
+                    <input type="password" id="password" required>
+                    <label>Password</label>
+
+
+                </div>
+
+                <div class="forgot">
+                    forgot password?
+
+
+                </div>
+                <!-- feedback and input submit to submit for logining in-->
+                <p id="feedback"></p>
+                <input type ="submit" value="login">
+                 <!--div class signup_link to contain link to register page-->
+                <div class="signup_link">
+                    not a member?<a href="../Pages/Register.html">Signup</a>
+
+
+                </div>
+
+                 <!-- for registration message -->
+                 <p id="msg"></p>
+
+
+                
+
+
+
+
+            </form>
+            
+
+
+
+             
+        </div>
+
+        <script>
+            // finction to check if the user is registerd and perform a login  
+            function isRegistered() {
+                // get the entered username and password from input field 
+                let username = document.getElementById("usernameInput").value;
+                let password = document.getElementById("password").value;
+    
+                // check if the user is registered
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+                // find the user with the entered username in the list of registered users 
+                let foundUser = users.find(user => user.username === username);
+                //// check if the user with the given username matches with the stored password 
+                if (foundUser && foundUser.password === password) {
+                    // Login successful
+                    document.getElementById("msg").innerText = "Welcome back, " + foundUser.username + "!";
+                    // Store the logged-in user in session storage
+                    sessionStorage.setItem("loggedInUser", foundUser.username);
+                } else {
+                    // Invalid username or password
+                    document.getElementById("msg").innerText = "Invalid username or password.";
+                }
+    
+                // Clear the form after submit
+                clearForm();
+    
+                return false; // Prevent form submission
+            }
+    
+            function clearForm() {
+                // Clear input fields
+                document.getElementById("usernameInput").value = "";
+                document.getElementById("password").value = "";
+            }
+        </script>
+
+       
+        
+   
+    
+
+
+    </body>
+</html>
+
+
+

@@ -1,0 +1,152 @@
+
+/* default styles for all elements */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Pixelify Sans', sans-serif;
+    text-decoration: none;
+    list-style: disc;
+}
+
+/* defining CSS variables for text color and main color */
+:root {
+    --text-color: #FFFFFF;
+    --main-color: #17E1BD;
+}
+
+/* Styling applied for the body */
+body{
+	min-height: 100vh;
+	background: url(../Images/jawbreaker_sample.png);
+	background-size: cover;
+	
+	
+	
+}
+
+/* Style for the header */
+header {
+    position: fixed; /* fix the postion of the header to the top of the page */
+    right: 0; /* position the header at the right */
+    z-index: 1000; /* set the z-index to 1000 (stacking order) for the header */
+    display: flex; /* flex layout for content in header*/
+    align-items: center; /* align the items center */
+    justify-content: space-between; /* Create space between items on the header */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* gradient background with 50 % opacity */
+    padding: 28px 12%; /* add padding to the header */
+    transition: all .50s ease; /* apply a smooth transition effect to all properties over 0.5 seconds */
+}
+
+
+/* styling for the navigation bar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* styling for nav links */
+.navbar a span {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 5px 15px;
+    margin: 0px 25px;
+    text-align: center;
+    white-space: nowrap; /* prevent text from wrapping to next line*/
+    transition: all .50s ease;
+}
+
+/* hover and active styles for navigation links */
+.navbar a:hover span {
+    color: var(--main-color);
+}
+
+.navbar a:active span {
+    color: var(--main-color);
+}
+
+/* styling for icons */
+.ri-pencil-line,
+.ri-trophy-line,
+.ri-gamepad-line,
+.ri-login-box-line,
+.ri-user-3-line {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 0px;
+    white-space: nowrap;
+    transition: all .50s ease;
+}
+
+/* styling for the logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* styling for the main and text logo */
+.MainLogo, .TextLogo {
+    font-size: 30px;
+    color: var(--main-color);
+}
+
+
+
+
+
+/* styling for the txt_field class*/
+.txt_field{
+
+	padding-top: 100px;
+	text-align: center;
+	color: var(--text-color);
+	
+
+	
+
+
+
+}
+/* styling for the header withing the txt_field class*/
+.txt_field h1{
+
+	font-size: 60px;
+	margin-bottom: 20px;
+	
+
+	
+
+
+
+
+
+
+}
+/* styling for the unordered list within the txt_field class*/
+.txt_field ul{
+
+	font-size: 35px;
+	text-align: left;
+	list-style-type: disc;
+	margin:0;
+	padding-left: 50px;
+	
+
+	
+
+
+
+
+}
+/* styling for the lists within the ul in the txt_field class*/
+.txt_field li{
+
+	text-align: left;
+	margin:30px 0;
+
+
+
+}

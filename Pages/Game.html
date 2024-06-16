@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game Page</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/Game-style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="#"><i class="TextLogo"><span>Tankers</span></i></a><span class="MainLogo"><img src="../Images/tank_logo.png" alt="Tank" width="20px" height="60px"></span>
+        </div>
+        <div class="navbar">
+            <a href="../Pages/Rules.html"><span>Rules</span></a><i class="ri-pencil-line"></i>
+            <a href="../Pages/Leaderboard.html"><span>Leaderboard</span></a><i class="ri-trophy-line"></i>
+            <a href="../Pages/Game.html"><span>Game</span></a><i class="ri-gamepad-line"></i>
+            <a href="../Pages/Login.html"><span>Login</span></a><i class="ri-login-box-line"></i>
+            <a href="../Pages/Register.html"><span>Register</span></a><i class="ri-user-3-line"></i>
+        </div>
+    </header>
+
+    <button id="startButton" class="start-button">Start</button>
+    <button id="menuButton" class="menu-button">Menu</button></a>
+    <button id="exitButton" class="exit-button">Exit</button>
+
+    <div class="txt_field">
+        <div class="title">
+            <h1>Tankers</h1>
+        </div>
+        <div class="score">
+            SCORE: <span id="scoreDisplay">000</span>
+        </div>
+    </div>
+
+    <div class="arrow">
+        <div class="up_arrow">
+            <img src="../Images/up_arrow.png" class="arrow-image">
+        </div>
+        <div class="down_arrow">
+            <img src="../Images/down_arrow.png" class="arrow-image">
+        </div>
+        <div class="left_arrow">
+            <img src="../Images/left_arrow.png" class="arrow-image">
+        </div>
+        <div class="right_arrow">
+            <img src="../Images/right_arrow.png" class="arrow-image">
+        </div>
+    </div>
+
+    <div class="lives">
+        <p>Lives: <span id="livesDisplay">3</span></p>
+    </div>
+
+    <div class="game-main">
+        <canvas id="gameCanvas" width="1480" height="480"></canvas>
+    </div>
+
+    <script type="module">
+        "use strict";
+    
+        // Import  classes from other modules
+        import { PlayerTank } from '../JS/PlayerTank.js';
+        import { EnemyTank } from '../JS/EnemyTank.js';
+        import { Bullet } from '../JS/Ammo.js';
+    
+        // Define the saveUserData function
+        function saveUserData(username, score) {
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            let user = { username, score };
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            
+        }
+    
+        // Define the Game class
+        class Game {
+            constructor() {
+                //// Initializing game elements and properties
+                // varaible for game canvas
+                this.canvas = document.getElementById('gameCanvas');
+                // variable for 2D context of the game canvas
+                this.context = this.canvas.getContext('2d');
+                // creating a new instance of PlayerTank with image path context and widht and height set
+                this.playerTank = new PlayerTank('../Images/PlayerTank .png', this.context, 50, 50);
+                // enemytank array to store enemy tank generated 
+                this.enemyTanks = [];
+                // playerbulet array to store the player bullets
+                this.playerBullets = [];
+                // varaible to set score to 0
+                this.score = 0;
+                // enemy bullet array to store enemy bullet 
+                this.enemyBullets = [];
+                // variable startbutton to get start button by id
+                this.startButton = document.getElementById('startButton');
+                 // initialzing player lives set to 3 
+                this.lives = 3; 
+                 // variable livesDisplay to get livesDisplay by id
+                this.livesDisplay = document.getElementById('livesDisplay');
+                // getting livesDispaly textcontent form html and setting lives to string type 
+                this.livesDisplay.textContent = this.lives.toString();
+                // variable menuButton to get menubutton by id
+                this.menuButton = document.getElementById("menuButton");
+                // exitButton to get exitButton by id
+                this.exitButton = document.getElementById("exitButton");
+                // scoreDisplay to get scoreDisplay by id
+                this.scoreDisplay = document.getElementById('scoreDisplay');
+                // dding click event listener to start button to startgame by calling startGame() method 
+                this.startButton.addEventListener('click', () => this.startGame());
+    
+                // add event listener for keydown event for player shooting
+                window.addEventListener('keydown', (event) => {
+                    if (event.key === ' ' && this.playerTank) {
+                        // call shootPlayerBullet on keydown event 
+                        this.shootPlayerBullet();
+                    }
+                });
+            }
+    
+            // method to set the size of the player tank
+            setPlayerTankSize(width, height) {
+                this.playerTank.width = width;
+                this.playerTank.height = height;
+            }
+    
+            // method to generate enemy tanks
+            generateEnemyTank() {
+                // if enemytank.length array is less than or equal to 0 then generate enemy tank 
+                if (this.enemyTanks.length <= 0) {
+                    //set x pos math.random to randomly generate x coordinate of enemy tank on canvas 
+                    let xPos = Math.random() * (this.canvas.width - 50);
+                    // set ypos math.random to randomly genreate y coordinate of eenmy tank on canvas
+                    let yPos = Math.random() * (this.canvas.height - 50);
+                    // create a new instance of enemyTank with image context and its xpos and ypos 
+                    let enemyTank = new EnemyTank('../Images/enemyTank.png', this.context, xPos, yPos);
+                    // setting eenmytank widht and height for collision 
+                    enemyTank.width = 50;
+                    enemyTank.height = 50;
+                    // push enemy tank into enemytanks array
+                    this.enemyTanks.push(enemyTank);
+                }
+            }
+    
+            // method to shoot a bullet from the player tank
+            shootPlayerBullet() {
+                7
+                if (this.playerTank) {
+                    let bullet = new Bullet('../Images/bullet.png', this.context, this.playerTank.xPos, this.playerTank.yPos, this.playerTank.rotation, 100, 100);
+                    this.playerBullets.push(bullet);
+                }
+            }
+    
+            // method to shoot a bullet from an enemy tank
+            shootEnemyBullet(enemyTank) {
+                let bullet = new Bullet('../Images/bullet.png', this.context, enemyTank.xPos, enemyTank.yPos, enemyTank.rotation, 100, 100);
+                this.enemyBullets.push(bullet);
+            }
+    
+            // method to move and draw player bullets
+            moveAndDrawPlayerBullets() {
+                for (let bullet of this.playerBullets) {
+                    bullet.move();
+                    bullet.draw();
+                }
+                // keeping only those bullets that are inAir = true removing the bullets in playerBullets array that are not 
+                this.playerBullets = this.playerBullets.filter(bullet => bullet.inAir);
+            }
+    
+            // method to move and draw enemy bullets
+            moveAndDrawEnemyBullets() {
+                for (let bullet of this.enemyBullets) {
+                    bullet.move();
+                    bullet.draw();
+                }
+                this.enemyBullets = this.enemyBullets.filter(bullet => bullet.inAir);
+            }
+    
+            // method to update the game state
+            update() {
+                // setting canvas widht and height 
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+                // Updatating and drawing enemy tanks
+                for (let enemyTank of this.enemyTanks) {
+                    enemyTank.playerTank = this.playerTank;
+                    enemyTank.draw();
+                   
+                }
+    
+                // randomly shoot bullets from enemy tank using math.random() function
+                for (let enemyTank of this.enemyTanks) {
+                    enemyTank.playerTank = this.playerTank;
+                    enemyTank.draw();
+                    
+                    if (Math.random() < 0.01) {
+                        this.shootEnemyBullet(enemyTank);
+                    }
+                }
+    
+                // draw and update player tank
+                this.playerTank.draw();
+                // handle keydown event for player tank
+                this.playerTank.handleKeyDown();
+    
+                // movment for playertank with keypress
+                if (this.playerTank.keysPressed["w"]) {
+                    this.playerTank.moveForward();
+                }
+                if (this.playerTank.keysPressed["s"]) {
+                    this.playerTank.moveBackward();
+                }
+                // move and draw player and enemy bullets
+                this.moveAndDrawPlayerBullets();
+                this.moveAndDrawEnemyBullets();
+    
+                // handle collisions between bullets and tanks
+                for (let enemyBullet of this.enemyBullets) {
+                    if (this.isCollision(enemyBullet, this.playerTank)) {
+                        this.enemyBullets = this.enemyBullets.filter(b => b !== enemyBullet);
+                        this.reducePlayerLives();
+                    }
+                }
+    
+                for (let bullet of this.playerBullets) {
+                    for (let i = this.enemyTanks.length - 1; i >= 0; i--) {
+                        let enemyTank = this.enemyTanks[i];
+                        if (this.isCollision(bullet, enemyTank)) {
+                            this.playerBullets = this.playerBullets.filter(b => b !== bullet);
+                            this.enemyTanks.splice(i, 1);
+                            this.incrementScore();
+                        }
+                    }
+                }
+    
+                // Request the next animation frame (smoother animation on key events)
+                requestAnimationFrame(() => this.update());
+            }
+    
+            // method to start the game on start button press
+            startGame() {
+                // check if the game is already running
+                if (!this.gameRunning) {
+                    // clear the interval if it exists
+                    clearInterval(this.enemyTankGenerator);
+    
+                    // start generating enemy tanks at intervals every 2 seconds 
+                    this.enemyTankGenerator = setInterval(() => this.generateEnemyTank(), 2000);
+    
+                    // start the game loop
+                    this.update();
+    
+                    // hide the buttons once game starts
+                    this.startButton.style.display = "none";
+                    this.menuButton.style.display = "none";
+                    this.exitButton.style.display = "none";
+    
+                    // set the gameRunning flag to true
+                    this.gameRunning = true;
+                }
+            }
+    
+            // method to reset the game
+            resetGame() {
+                // Stop the game loop
+                clearInterval(this.enemyTankGenerator);
+                // set the gameRunning flag to false 
+                this.gameRunning = false;
+    
+                // Reset the game variables
+                this.PlayerTank;
+                this.enemyTanks = [];
+                this.playerBullets = [];
+                this.score = 0;
+                this.enemyBullets = [];
+                this.lives = 3;
+                this.livesDisplay.textContent = this.lives.toString();
+                this.scoreDisplay.textContent = this.score.toString().padStart(3, '0');
+    
+                // Reset the player tank position
+                this.playerTank.xPos = 50;
+                this.playerTank.yPos = 50;
+    
+                //  display the buttons again 
+                this.startButton.style.display = "block";
+                this.menuButton.style.display = "block";
+                this.exitButton.style.display = "block";
+            }
+    
+            // method to check collison between two obj algorithm 
+            isCollision(obj1, obj2) {
+                return (
+                    obj1.xPos < obj2.xPos + obj2.width &&
+                    obj1.xPos + obj1.width > obj2.xPos &&
+                    obj1.yPos < obj2.yPos + obj2.height &&
+                    obj1.yPos + obj1.height > obj2.yPos
+                );
+            }
+    
+            // method created to incremete the score 
+            incrementScore() {
+                this.score++;
+                this.scoreDisplay.textContent = this.score.toString().padStart(3, '0');
+    
+                // update the user score on local storage 
+                let loggedInUser = sessionStorage.getItem("loggedInUser");
+                if (loggedInUser) {
+                    let userScore = JSON.parse(localStorage.getItem(loggedInUser)) || [];
+                    userScore.push(this.score);
+                    localStorage.setItem(loggedInUser, JSON.stringify(userScore));
+                }
+            }
+    
+            // method to reduce player lives and check for game over
+            reducePlayerLives() {
+                this.lives--;
+                this.livesDisplay.textContent = this.lives.toString();
+                if (this.lives <= 0) {
+                    this.gameOver();
+                }
+            }
+    
+            // method created  to handle game over
+            gameOver() {
+                // dispaly game over message
+                alert("Game Over! Your score: " + this.score);
+    
+                // store final score to storage
+                let loggedInUser = sessionStorage.getItem("loggedInUser");
+                if (loggedInUser) {
+                    let userScore = JSON.parse(localStorage.getItem(loggedInUser)) || [];
+                    userScore.push(this.score);
+                    localStorage.setItem(loggedInUser, JSON.stringify(userScore));
+    
+                    // Calling the saveUserData to update the leaderboard
+                    saveUserData(loggedInUser, this.score);
+                }
+    
+                // resetting the game
+                this.resetGame();
+            }
+        }
+    
+        // Initialize the game when the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function () {
+            let game = new Game();
+            game.setPlayerTankSize(50, 50); // Set the width and height of the player tank for collison with enemy bullet 
+        });
+        window.onload = function () {
+            // on window reload upddate the leaderboard 
+            updateLeaderboard();
+        };
+    </script>
+</body>
+
+</html>

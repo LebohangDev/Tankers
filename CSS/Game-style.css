@@ -1,0 +1,204 @@
+
+
+/* default styles for all elements */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Pixelify Sans', sans-serif;
+    text-decoration: none;
+    list-style: disc;
+}
+
+/* defining CSS variables for text color and main color */
+:root {
+    --text-color: #FFFFFF;
+    --main-color: #17E1BD;
+}
+
+/* Styling applied for the body */
+body {
+    min-height: 100vh;
+    background: url(../Images/map3.png); /*background image*/
+    background-size: cover; /* applying background image to cover through the whole page*/
+}
+
+/* Style for the header */
+header {
+    position: fixed; /* fix the postion of the header to the top of the page */
+    right: 0; /* position the header at the right */
+    z-index: 1000; /* set the z-index to 1000 (stacking order) for the header */
+    display: flex; /* flex layout for content in header*/
+    align-items: center; /* align the items center */
+    justify-content: space-between; /* Create space between items on the header */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* gradient background with 50 % opacity */
+    padding: 28px 12%; /* add padding to the header */
+    transition: all .50s ease; /* apply a smooth transition effect to all properties over 0.5 seconds */
+}
+
+
+/* styling for the navigation bar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* styling for nav links */
+.navbar a span {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 5px 15px;
+    margin: 0px 25px;
+    text-align: center;
+    white-space: nowrap; /* prevent text from wrapping to next line*/
+    transition: all .50s ease;
+}
+
+/* hover and active styles for navigation links */
+.navbar a:hover span {
+    color: var(--main-color);
+}
+
+.navbar a:active span {
+    color: var(--main-color);
+}
+
+/* styling for icons */
+.ri-pencil-line,
+.ri-trophy-line,
+.ri-gamepad-line,
+.ri-login-box-line,
+.ri-user-3-line {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 0px;
+    white-space: nowrap;
+    transition: all .50s ease;
+}
+
+/* styling for the logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* styling for the main and text logo */
+.MainLogo, .TextLogo {
+    font-size: 30px;
+    color: var(--main-color);
+}
+
+/* styling for the buttons on the game page*/
+button{
+
+    width: 300px; 
+    height: 70px;
+    font-size: 30px;
+    border: 2px solid black;
+    border-radius: 25px;
+
+
+
+}
+
+/* styling for start-button */
+.start-button {
+    background-color: rgb(7, 187, 7); 
+    position: absolute;
+    left: 40%;
+    bottom: 50%;
+
+}
+/* styling for menu-button */
+.menu-button {
+    background-color: white; 
+    position: absolute;
+    left: 40%;
+    bottom: 30%;
+}
+/* styling for exit-button */
+.exit-button {
+    background-color: rgb(199, 199, 11);
+    position: absolute;
+    left: 40%;
+    bottom: 10%;
+    
+    
+
+    
+
+}
+
+/* styling for start-button, menu-button, and exit-button to add hover effect when cursor is hovering over buttons */
+.start-button:hover, .menu-button:hover, .exit-button:hover {
+    transform: scale(1.1); /* Scale the button on hover */
+    background-color: var(--main-color); 
+}
+
+
+ /* styling for title of page  */
+.title h1{
+
+    padding-top: 150px;
+    text-align: center;
+    color: black;
+    font-size: 90px;
+    
+
+}
+/* styling for score */
+.score{
+
+    position: absolute;
+    right:10%;
+    color: var(--text-color);
+    font-size: 30px;
+
+}
+
+/* styling for the arrow container */
+.arrow-image {
+    transform: scale(1.5); /* transform scale to increase size of container of arrows */
+   
+}
+
+/* styling for arrows to change the positions */
+.up_arrow {
+    position: absolute;
+    left: 90%;
+    bottom: 20%;
+}
+
+.down_arrow {
+    position: absolute;
+    left: 90.5%;
+    bottom: 10%;
+}
+
+.left_arrow {
+    position: absolute;
+    left: 87%;
+    bottom: 15%;
+    transform: rotate(-90deg);
+}
+
+.right_arrow {
+    position: absolute;
+    left: 93%;
+    bottom: 15%;
+    transform: rotate(90deg);
+}
+
+/* styling for lives counter */
+.lives p{
+
+
+    position: absolute;
+    right:13%;
+    top: 25%;
+    color: var(--text-color);
+    font-size: 30px;
+}

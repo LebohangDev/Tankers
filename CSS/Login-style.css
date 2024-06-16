@@ -1,0 +1,178 @@
+
+/* default styles for all elements */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Pixelify Sans', sans-serif;
+    text-decoration: none;
+    list-style: disc;
+}
+
+/* defining CSS variables for text color and main color */
+:root {
+    --text-color: #FFFFFF;
+    --main-color: #17E1BD;
+}
+
+/* Styling applied for the body */
+body {
+    min-height: 100vh;
+    background: url(../Images/map4.jpg); /*background image*/
+    background-size: cover; /* applying backgorund imageto cover through the whole page*/
+}
+
+/* Style for the header */
+header {
+    position: fixed; /* fix the postion of the header to the top of the page */
+    right: 0; /* position the header at the right */
+    z-index: 1000; /* set the z-index to 1000 (stacking order) for the header */
+    display: flex; /* flex layout for content in header*/
+    align-items: center; /* align the items center */
+    justify-content: space-between; /* Create space between items on the header */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* gradient background with 50 % opacity */
+    padding: 28px 12%; /* add padding to the header */
+    transition: all .50s ease; /* apply a smooth transition effect to all properties over 0.5 seconds */
+}
+
+
+/* styling for the navigation bar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* styling for nav links */
+.navbar a span {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 5px 15px;
+    margin: 0px 25px;
+    text-align: center;
+    white-space: nowrap; /* prevent text from wrapping to next line*/
+    transition: all .50s ease;
+}
+
+/* hover and active styles for navigation links */
+.navbar a:hover span {
+    color: var(--main-color);
+}
+
+.navbar a:active span {
+    color: var(--main-color);
+}
+
+/* styling for icons */
+.ri-pencil-line,
+.ri-trophy-line,
+.ri-gamepad-line,
+.ri-login-box-line,
+.ri-user-3-line {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 0px;
+    white-space: nowrap;
+    transition: all .50s ease;
+}
+
+/* styling for the logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* styling for the main and text logo */
+.MainLogo, .TextLogo {
+    font-size: 30px;
+    color: var(--main-color);
+}
+
+/* styling for the login form */
+.login {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    position: absolute; /* apply postion to absolute*/
+    bottom: 25%;
+    left: 35%;
+}
+
+/* styling for the login header */
+.login h1 {
+    padding: 20px;
+    border-bottom: 1px solid silver;
+}
+
+/* styling for text input fields username and passwrod */
+.txt_field {
+    margin: 20px 0;
+    position: relative;
+}
+
+.txt_field input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #adadad;
+    outline: none;
+}
+
+/* styling for input labels */
+.txt_field label {
+    position: absolute;
+    top: -20px;
+    left: 5px;
+    font-size: 16px;
+    transition: .5s; /* apply smooth transition of 0.5 seconds*/
+}
+
+/* styling for input labels when input is focused or valid */
+.txt_field input:focus ~ label,
+.txt_field input:valid ~ label {
+    top: -30px; /* postion of label changes by 10 px when focused to add animation effect*/
+    color: var(--main-color); /* color change to main color*/
+}
+
+/* styling for the submit button */
+input[type="submit"] {
+    width: 100%;
+    height: 50px;
+    background: #258cd1;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+/* hover styling for the submit button */
+input[type="submit"]:hover {
+    background: var(--main-color);
+    transition: .5s;
+}
+
+/* styling for the signup link */
+.signup_link {
+    margin: 20px 0;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Styling for the signup link text */
+.signup_link a {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+/* hover styling for the signup link text */
+.signup_link a:hover {
+    text-decoration: underline;
+}

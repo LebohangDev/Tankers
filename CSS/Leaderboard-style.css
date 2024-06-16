@@ -1,0 +1,219 @@
+
+/* default styles for all elements */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Pixelify Sans', sans-serif;
+    text-decoration: none;
+    list-style: disc;
+}
+
+/* defining CSS variables for text color and main color */
+:root {
+    --text-color: #FFFFFF;
+    --main-color: #17E1BD;
+}
+
+/* Styling applied for the body */
+body{
+	min-height: 100vh;
+	background: url(../Images/map2.png);
+	background-size: cover;
+	
+	
+	
+}
+/* Style for the header */
+header {
+    position: fixed; /* fix the postion of the header to the top of the page */
+    right: 0; /* position the header at the right */
+    z-index: 1000; /* set the z-index to 1000 (stacking order) for the header */
+    display: flex; /* flex layout for content in header*/
+    align-items: center; /* align the items center */
+    justify-content: space-between; /* Create space between items on the header */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* gradient background with 50 % opacity */
+    padding: 28px 12%; /* add padding to the header */
+    transition: all .50s ease; /* apply a smooth transition effect to all properties over 0.5 seconds */
+}
+
+
+/* styling for the navigation bar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* styling for nav links */
+.navbar a span {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 5px 15px;
+    margin: 0px 25px;
+    text-align: center;
+    white-space: nowrap; /* prevent text from wrapping to next line*/
+    transition: all .50s ease;
+}
+
+/* hover and active styles for navigation links */
+.navbar a:hover span {
+    color: var(--main-color);
+}
+
+.navbar a:active span {
+    color: var(--main-color);
+}
+
+/* styling for icons */
+.ri-pencil-line,
+.ri-trophy-line,
+.ri-gamepad-line,
+.ri-login-box-line,
+.ri-user-3-line {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 0px;
+    white-space: nowrap;
+    transition: all .50s ease;
+}
+
+/* styling for the logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    
+}
+
+/* styling for the main and text logo */
+.MainLogo, .TextLogo {
+    font-size: 30px;
+    color: var(--main-color);
+}
+
+
+
+/* Styling for the txt_field class */
+.txt_field {
+    padding-top: 100px;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 35px;
+}
+
+/* Styling for the table class */
+.table {
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-color);
+    padding-top: 30px;
+    font-size: 50px;
+}
+
+/* Styling for table header*/
+th {
+    padding: 20px;
+    text-align: center;
+    margin: 10px;
+}
+
+/* styling for table data */
+td {
+    padding: 5px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+/* styling for images within the .Diamond class */
+.Diamond img {
+    position: absolute;
+}
+
+/* styling for the first image within the .Diamond class */
+.Diamond img:nth-child(1) {
+    top: 300px;
+    left: 50px;
+    transform: rotate(20deg);
+}
+
+/* styling for the second image within the .Diamond class */
+.Diamond img:nth-child(2) {
+    top: 150px;
+    left: 200px;
+    transform: rotate(-20deg);
+}
+
+/* styling for the third image within the .Diamond class */
+.Diamond img:nth-child(3) {
+    top: 200px;
+    left: 350px;
+    transform: rotate(20deg);
+}
+
+/* styling for the fourth image within the .Diamond class */
+.Diamond img:nth-child(4) {
+    top: 400px;
+    left: 350px;
+    transform: rotate(-20deg);
+}
+
+/* styling for the fifth image within the .Diamond class */
+.Diamond img:nth-child(5) {
+    top: 500px;
+    left: 100px;
+    transform: rotate(20deg);
+}
+
+/* styling for the sixth image within the .Diamond class */
+.Diamond img:nth-child(6) {
+    top: 700px;
+    left: 400px;
+    transform: rotate(-20deg);
+}
+
+/* styling for the seventh image within the .Diamond class */
+.Diamond img:nth-child(7) {
+    top: 300px;
+    right: 50px;
+    transform: rotate(20deg);
+}
+
+/* styling for the eighth image within the .Diamond class */
+.Diamond img:nth-child(8) {
+    top: 150px;
+    right: 200px;
+    transform: rotate(-20deg);
+}
+
+/* styling for the ninth image within the .Diamond class */
+.Diamond img:nth-child(9) {
+    top: 200px;
+    right: 350px;
+    transform: rotate(20deg);
+}
+
+/* styling for the tenth image within the .Diamond class */
+.Diamond img:nth-child(10) {
+    top: 400px;
+    right: 350px;
+    transform: rotate(-20deg);
+}
+
+/* styling for the eleventh image within the .Diamond class */
+.Diamond img:nth-child(11) {
+    top: 500px;
+    right: 100px;
+    transform: rotate(20deg);
+}
+
+/* styling for the twelfth image within the .Diamond class */
+
+.Diamond img:nth-child(12) {
+    top: 700px;
+    right: 400px;
+	transform: rotate(-20deg);
+}
+
+

@@ -1,0 +1,192 @@
+
+/* default styles for all elements */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Pixelify Sans', sans-serif;
+    text-decoration: none;
+    list-style: disc;
+}
+
+/* defining CSS variables for text color and main color */
+:root {
+    --text-color: #FFFFFF;
+    --main-color: #17E1BD;
+}
+
+/* Styling applied for the body */
+body {
+    min-height: 100vh;
+    background: url(../Images/map4.jpg); /*background image*/
+    background-size: cover; /* applying backgorund imageto cover through the whole page*/
+}
+
+/* Style for the header */
+header {
+    position: fixed; /* fix the postion of the header to the top of the page */
+    right: 0; /* position the header at the right */
+    z-index: 1000; /* set the z-index to 1000 (stacking order) for the header */
+    display: flex; /* flex layout for content in header*/
+    align-items: center; /* align the items center */
+    justify-content: space-between; /* Create space between items on the header */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* gradient background with 50 % opacity */
+    padding: 28px 12%; /* add padding to the header */
+    transition: all .50s ease; /* apply a smooth transition effect to all properties over 0.5 seconds */
+}
+
+
+/* styling for the navigation bar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* styling for nav links */
+.navbar a span {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 5px 15px;
+    margin: 0px 25px;
+    text-align: center;
+    white-space: nowrap; /* prevent text from wrapping to next line*/
+    transition: all .50s ease;
+}
+
+/* hover and active styles for navigation links */
+.navbar a:hover span {
+    color: var(--main-color);
+}
+
+.navbar a:active span {
+    color: var(--main-color);
+}
+
+/* styling for icons */
+.ri-pencil-line,
+.ri-trophy-line,
+.ri-gamepad-line,
+.ri-login-box-line,
+.ri-user-3-line {
+    color: var(--text-color);
+    font-size: 30px;
+    font-weight: 300;
+    padding: 0px;
+    white-space: nowrap;
+    transition: all .50s ease;
+}
+
+/* styling for the logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* styling for the main and text logo */
+.MainLogo, .TextLogo {
+    font-size: 30px;
+    color: var(--main-color);
+}
+
+/* styling for the register form */
+.register {
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    position: absolute; /* apply postion to absolute*/
+    bottom: 10%;
+    left: 35%;
+}
+
+/* styling for the register header */
+.register h1 {
+    padding: 20px;
+    border-bottom: 1px solid silver;
+}
+
+/* styling for the main user info */
+.main-user-info {
+    display: flex; /* use flex for layout */
+    flex-wrap: wrap; /* allow flex items to wrap to the next row */
+    justify-content: space-between; /* spread items evenly with space in-between */
+    padding: 20px 0; 
+}
+
+/* styling for user input boxes */
+.user-input-box {
+    display: flex;
+    flex-wrap: wrap; 
+    width: 50%;
+    padding-bottom: 15px; 
+}
+
+/* styling for labels within user input boxes */
+.user-input-box label {
+    width: 95%; 
+    color: black; /* set text color to black */
+    font-size: 20px; 
+    font-weight: 400; 
+    margin: 5px 0; /* add margin above and below the label */
+}
+
+/* styling for input fields within user input boxes */
+.user-input-box input {
+    height: 40px;
+    width: 95%;
+    border-radius: 7px;
+    outline: none;
+    border: 1px solid grey;
+    padding: 0 10px;
+}
+
+/* styling for the gender title */
+.gender-title {
+    color: black;
+    font-size: 24px;
+    font-weight: 600;
+    border-bottom: 1px solid white;
+}
+
+/* styling for gender category */
+.gender-category {
+    margin: 15px 0;
+    color: black;
+}
+
+/* styling for labels within gender-category class*/
+.gender-category label {
+    padding: 0 20px 0 5px; /* Add padding for alignment */
+}
+
+/* styling for labels, input fields, and submit input */
+.gender-category label,
+.gender-category input,
+.submit input {
+    cursor: pointer;/* to change the cursor to a pointing hand symbol when hovering over*/
+}
+
+/* styling for the submit */
+.submit {
+    margin-top: 40px; /* Add top margin */
+}
+
+/* styling for the submit button */
+.submit input {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    color: rgb(209, 209, 209);
+    background: #1DA1F2;
+}
+
+/* hover effect for the submit button */
+.submit input:hover {
+    background: var(--main-color); /* change the background color on hover */
+}

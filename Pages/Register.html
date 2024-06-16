@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--register page-->
+    <title>Register Page</title>
+    <!--link to CSS stylesheet-->
+    <link rel="stylesheet" type="text/css" href="../CSS/Register-style.css">
+    <!--link for font style and icons-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <!--div class logo container to hold the logo-->
+        <div class="logo-container">
+            <a href="#"><i class="TextLogo"><span>Tankers</span></i></a><span class="MainLogo"><img
+                    src="../Images/tank_logo.png" alt="Tank" width="20px" height="60px"></span>
+        </div>
+        <div class="navbar">
+            <!--div class navbar for navigation bar holding the elements of the navbar-->
+            <a href="../Pages/Rules.html"><span>Rules</span></a><i class="ri-pencil-line"></i>
+            <a href="../Pages/Leaderboard.html"><span>Leaderboard</span></a><i class="ri-trophy-line"></i>
+            <a href="../Pages/Game.html"><span>Game</span></a><i class="ri-gamepad-line"></i>
+            <a href="../Pages/Login.html"><span>Login</span></a><i class="ri-login-box-line"></i>
+            <a href="../Pages/Register.html"><span>Register</span></a><i class="ri-user-3-line"></i>
+        </div>
+    </header>
+    <!--div class register containing the elemnts of the regsiter-->
+    <div class="register">
+        <!--header for regsiter-->
+        <h1>Register</h1>
+        <!--form containing the text-->
+        <form action="#" onsubmit="register(); return false;">
+            <!--div class to contain the user info-->
+            <div class="main-user-info">
+                <!--div class user-input-box used to contain the label and input type for register-->
+                <div class="user-input-box">
+                    <label> Full Name </label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter Full Name" />
+                </div>
+
+                <div class="user-input-box">
+                    <label> Username </label>
+                    <input type="text" id="username" name="username" placeholder="Enter Username" />
+                </div>
+
+                <div class="user-input-box">
+                    <label> Phone Number </label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter Phone Number" />
+                </div>
+                <div class="user-input-box">
+                    <label> Password </label>
+                    <input type="password" id="password" name="password" placeholder="Enter Password" />
+                </div>
+
+                <div class="user-input-box">
+                    <label> Confirm Password </label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" />
+                </div>
+
+            </div>
+            <!--div class gender-details-box to contain the selection of gender-->
+            <div class="gender-details-box">
+                <!--span containing class gender-title containing the header for gender section-->
+                <span class="gender-title"> Gender </span>
+                <!--div class gender-category containing the input type and label-->
+                <div class="gender-category">
+                    <input type="radio" name="gender" id="male">
+                    <label> Male </label>
+                    <input type="radio" name="gender" id="female">
+                    <label> Female </label>
+                    <input type="radio" name="gender" id="other">
+                    <label> Other </label>
+                </div>
+            </div>
+            <!--div class submit to submit registration-->
+            <div class="submit">
+                <input type="submit" value="Register">
+            </div>
+            <!-- Placeholder for the registration message -->
+            <p id="msg"></p>
+        </form>
+    </div>
+
+	<script>
+        // retrieving user data from local storage
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+    
+        // password regex must have a capital letter, a small letter, and a number, and must be 6 char long
+        let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{6,}$/;
+        // phone number regex mst have  10-digit  phone number
+        let phoneNumberRegex = /^\d{10}$/;
+    
+        // initializing the variables button and passwordInput and phoneNumberInput
+        let button;
+        let passwordInput;
+        let phoneNumberInput;
+    
+        // function to initialize the page
+        window.onload = init;
+    
+        function init() {
+            // getting the submit button and disable it initially at the start
+            button = document.querySelector(".submit input");
+            button.disabled = true;
+    
+            // getting password input and initially setting color to red
+            passwordInput = document.getElementById("password");
+            passwordInput.style.color = "red";
+    
+            // getting phone number input and initially setting color to red
+            phoneNumberInput = document.getElementById("phoneNumber");
+            phoneNumberInput.style.color = "red";
+    
+            // adding  event listener for input on both password and phone number
+            passwordInput.addEventListener("input", checkPassword);
+            phoneNumberInput.addEventListener("input", checkPhoneNumber);
+        }
+    
+        // function to check if the password meets the criteria set
+        function checkPassword() {
+            let password = passwordInput.value;
+            let result = passwordRegex.test(password);
+    
+            // if statement to enable or disable submit button depending on the result of the password
+            
+            if (result) {
+                button.disabled = false;
+                // green if password does meet the criteria 
+                passwordInput.style.color = "green";
+            } else {
+                button.disabled = true;
+                // red if it does not meet the password criteria 
+                passwordInput.style.color = "red";
+            }
+        }
+    
+        // function to check if the phone number meets the criteria
+        function checkPhoneNumber() {
+            let phoneNumber = phoneNumberInput.value;
+            let result = phoneNumberRegex.test(phoneNumber);
+    
+            // if statement to set phone number color to green or red depending if it meets the phonenumber regex or not 
+            if (result) {
+                phoneNumberInput.style.color = "green";
+            } else {
+                phoneNumberInput.style.color = "red";
+            }
+        }
+    
+        // function to handle the registration and storing registration in local storage
+        function register() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let phoneNumber = document.getElementById("phoneNumber").value;
+            let score = "";
+    
+            // checking if the passwords match
+            if (password !== confirmPassword) {
+                document.getElementById("msg").innerText = "Passwords do not match.";
+                return;
+            }
+    
+            // calling the checkPassword function to see if the password meets the criteria
+            checkPassword();
+    
+            // if the password meets the criteria, proceed with registration
+            if (button.disabled === false) {
+                // check if the username already exists
+                if (users.some(user => user.username === username)) {
+                    document.getElementById("msg").innerText = "Username already exists. Choose a different one.";
+                    clearForm();
+                    passwordInput.style.color = "red";
+                    return;
+                }
+    
+                // creating a new user object
+                let newUser = {
+                    username: username,
+                    password: password,
+                    score: score,
+                    phoneNumber: phoneNumber,
+                };
+    
+                // add the new user to the array by pushing it to users
+                users.push(newUser);
+    
+                // save the updated array back to local storage
+                localStorage.setItem("users", JSON.stringify(users));
+    
+                document.getElementById("msg").innerText = "Congrats, you are registered!";
+                // clear form to clear form after successful registration
+                clearForm();
+                passwordInput.style.color = "green";
+    
+                // calling saveUserData function to update the leaderboard
+                saveUserData(username, score);
+            } else {
+                // error message is sent if the password does not meet criteria
+                document.getElementById("msg").innerText = "Password must contain at least one small letter, at least one capital letter, and be at least 6 characters long.";
+                // clear form function called to clear form after failed registration
+                clearForm();
+                passwordInput.style.color = "red";
+            }
+        }
+    
+        // function to clear the registration form
+        function clearForm() {
+            // Clear input fields
+            document.getElementById("fullname").value = "";
+            document.getElementById("phoneNumber").value = "";
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("confirmPassword").value = "";
+    
+            // disable the submit button again
+            button.disabled = true;
+        }
+    </script>
+
+
+	
+	
+	
+
+</body>
+
+</html>
