@@ -1,2 +1,2 @@
 # Tankers
- developed website tank game hopy you like it, run game on live server:) 
+ I developed a website tank game hope you like it; run game on a live server:) 
